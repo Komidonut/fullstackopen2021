@@ -1,0 +1,23 @@
+
+note over browser:
+browser registeres new event on click by form
+and immediately prevents default default handling
+of form submit
+end note
+
+note over browser:
+browser ads form body to notes as new_note
+end note
+
+note over browser:
+browser redraws note page with
+new note being included
+end note
+
+browser-->server: HTTP POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa
+note over browser:
+POST request contains text of a note and
+its creation data in a form of a json
+end note
+
+server-->browser: 201 Created
