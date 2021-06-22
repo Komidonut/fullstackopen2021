@@ -15,7 +15,7 @@ const App = () => {
   
   const [selected, setSelected] = useState(0);
 
-  const [votes, setVotes] = useState(Array.apply(null, new Array(10)).map(Number.prototype.valueOf,0))
+  const [votes, setVotes] = useState(Array.apply(null, new Array(anecdotes.length)).map(Number.prototype.valueOf,0))
   
   const handleClick = () => {
     const newAnec = chooseAnec()
