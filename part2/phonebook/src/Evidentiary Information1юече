@@ -1,0 +1,58 @@
+Evidentiary Information:
+Protocol: BITTORRENT
+Infringed Work: A Quiet Place Part II
+Infringing FileName: A.Quiet.Place.Part.II.2021.TC720p.Clean.Cam.H264.AC3.WARRIORS
+Infringing FileSize: 1310261453
+Infringer's IP Address: 173.0.156.72
+Infringer's Port: 37561
+Initial Infringement Timestamp: 2021-06-18T18:34:50Z
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+<Infringement xmlns="http://www.acns.net/ACNS" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.acns.net/ACNS http://www.acns.net/v1.2/ACNS2v1_2.xsd">
+  <Case>
+    <ID>c77d9643fc39c15188dd</ID>
+    <Status>Open</Status>
+    <Severity>Normal</Severity>
+  </Case>
+  <Complainant>
+    <Entity>Paramount Pictures Corporation</Entity>
+    <Contact>Vobile - Compliance</Contact>
+    <Address>2880 Lakeside Drive, Suite 360
+Santa Clara, CA 95054</Address>
+    <Phone>+1 (408) 492 1100</Phone>
+    <Email>p2p@paramount.copyright-notice.com</Email>
+  </Complainant>
+  <Service_Provider>
+    <Entity>Servers-com</Entity>
+    <Email>abuse@servers.com</Email>
+  </Service_Provider>
+  <Source>
+    <TimeStamp>2021-06-18T18:34:50Z</TimeStamp>
+    <IP_Address>173.0.156.72</IP_Address>
+    <Port>37561</Port>
+    <Type>BitTorrent</Type>
+    <SubType BaseType="P2P" Protocol="BITTORRENT"/>
+    <Number_Files>1</Number_Files>
+  </Source>
+  <Content>
+    <Item>
+      <TimeStamp>2021-06-18T18:34:50Z</TimeStamp>
+      <Title>A Quiet Place Part II</Title>
+      <FileName>A.Quiet.Place.Part.II.2021.TC720p.Clean.Cam.H264.AC3.WARRIORS</FileName>
+      <FileSize>1310261453</FileSize>
+      <Hash Type="SHA1">675b8c63cbd67cb357258e9c93520107b09c17cb</Hash>
+    </Item>
+  </Content>
+</Infringement>
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.22 (GNU/Linux)
+
+iQEcBAEBAgAGBQJgzOdOAAoJEN5LM3Etqs/WjQYIAIeFIdlMUj2LpuO4Ae12+RFE
+jc0a824q67TdHUj5fUl1ckPCoGI/xXedaWFlR2NpwVD1E4BSn8kctG1uiuJbZDCp
+zstXZiAwu7iBzBnFDCUD2NXl6lPYjjOKggf0ydsmALL5svxOiE2jKkpSD2F4/q1E
+GkPove7IH6MgZ17L67STupG6i7nDwbX4se43VSadaWO324F9/Rt0C0Gk5KLPg4Vp
+ribmK6RaDPhcdzjAiDojiDCsqcaOT+3vwB5TzlXKp5mZ+hG+GPchorZw+kwS9PL7
+oDzpkGBTMR2WSXHnizFqw86GwGJbpND7j+1JsPAjOWJv8+iUUBWLU3+PM62fVsw=
+=wu4d
+-----END PGP SIGNATURE-----
