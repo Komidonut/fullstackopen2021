@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from 'axios'
+import callServer from "./Requests";
 
 const Button = ({ handleClick, text }) => {
   return (
@@ -23,20 +23,21 @@ const App = () => {
 
   //parse notes data from json server
   useEffect(() => {
-    axios
-      .get('http://localhost:3001/persons')
-      .then(response => {
-        setPersons(response.data)
+    callServer
+      .getBase()
+      .then(phoneBook => {
+        console.log(phoneBook);
+        setPersons(phoneBook)
       })
   }, [])
-  console.log('render', persons.length, 'persons');
 
   // reset input
   const reset = () => {
     setNewName("");
     setNewNumber("");
   };
-
+  
+  
   // add new person to phonebook
   const addPerson = (event) => {
     event.preventDefault();
@@ -52,17 +53,37 @@ const App = () => {
             return obj.number === newNumber;
           }).name
         }`
-      );
-    }
-    //set updated phonebook
-    const newPersons = [
-      ...persons,
-      { name: newName, id: persons.length + 1, number: newNumber },
-    ];
-    //render updated phonebook
-    setPersons(newPersons);
-    reset();
+        );
+      }
+      const newPerson = {
+        name: newName,
+        id: persons.length + 1,
+        number: newNumber 
+      }
+      //render updated phonebook
+      callServer
+      .addRecord(newPerson)
+      .then(returnedPersons => {
+        setPersons(persons.concat(returnedPersons));
+        reset();
+      })
   };
+
+  const deletePerson = (person) => {
+    const message = `Do you really want to delete ${person.name}:${person.id} from your phonebook?`
+    if (window.confirm(message)) {
+
+      callServer
+        .deleteRecord(person.id)
+        .then(response => {
+          setPersons(() => {
+            const newPersons = persons.filter(item => item.id !== person.id)
+            return newPersons
+          });
+          reset();
+        })
+    }
+  }
 
 
   return (
@@ -91,7 +112,12 @@ const App = () => {
       <h2>Numbers</h2>
       {persons.filter(person => person.name.toLowerCase().includes(newFilter.toLowerCase())).map((person) => (
         <p key={person.id}>
-          {person.name} {person.number}
+          {person.name} 
+          {person.number}
+          <Button 
+            handleClick={() => deletePerson(person)}
+            text = "delete"
+          />
         </p>
       ))}
       <div>

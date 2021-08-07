@@ -1,23 +1,27 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
+//data for construction of a request to weather api
+const weatherRequest = {
+  base: 'http://api.openweathermap.org/data/2.5/weather?q=',
+  appId: '&appid=' + process.env.REACT_APP_WEATHER_ID
+}
+
 const App = () => {
 
   console.log('Rerendered!')
   const [countries, setCountriesData] = useState([]);
   const [filter, setFilter] = useState("");
+  const [selectedCountry, selectCountry] = useState(null)
+  const [weather, setWeather] = useState({})
 
-
-  const weatherRequest = {
-    base: 'http://api.openweathermap.org/data/2.5/weather?q=',
-    appId: '&appid=23eb6a0c17a0a740a7bc3610a74f03de'
-  }
-
+  // changing list of countries according to filter text input
   const countriesSearched = () => {
     return countries.filter((country) =>
       country.name.toLowerCase().includes(filter.toLowerCase())
     );
   };
+
 
 
   // getting countries data from external API
@@ -26,9 +30,7 @@ const App = () => {
       .get("https://restcountries.eu/rest/v2/all")
       .then((response) => {
         console.log('getting countries data...!');
-
         const countriesData = response.data;
-        
         setCountriesData(countriesData.map(country => ({ 
           ...country, 
           showDetails: false,
@@ -36,22 +38,28 @@ const App = () => {
       })
   }, []);
 
+  //getting weather data
+  useEffect(() => {
+    if (!selectedCountry) {
+      return
+    }
+    axios
+      .get(weatherRequest.base + countries.find((country, index) =>
+      country.alpha2Code === selectedCountry).capital + weatherRequest.appId)
+      .then((response) => {
+        setWeather((prevWeather) => ({
+          ...prevWeather,
+          [selectedCountry]: response.data
+        }))
+      })
+  }, [selectedCountry, countries])
 
-
+  //handling click on Show button
   function handleToggleComplete(country) {
-    console.log('альфакод страны ', country.alpha2Code);
-    const listUpdated = countries.map(element => {
-      if (element.alpha2Code === country.alpha2Code) {
-        const elementUpdated = {
-          ...element,
-          showDetails: !element.showDetails,
-        }
-        return elementUpdated
-      }
-      return element
-    })
-    setCountriesData(listUpdated)
+    selectCountry((prevSelect) => prevSelect === country.alpha2Code ? null : country.alpha2Code)
   };
+
+
 
   return (
     <>
@@ -72,13 +80,14 @@ const App = () => {
             {country.name}
             <button
               onClick={() => handleToggleComplete(country)}>
-              {country.showDetails === false ? 'Show' : 'Hide'}
+              {country.alpha2Code !== selectedCountry ? 'Show' : 'Hide'}
             </button>
-            {country.showDetails && (
+            {country.alpha2Code === selectedCountry && (
               <div key={country.alpha2Code}>
                 <h1>{country.name}</h1>
                 <p>{country.capital}</p>
                 <p>{country.population}</p>
+                {weather[selectedCountry] ? <p>{JSON.stringify(weather[selectedCountry])}</p> : null}
                 <img alt='flag' src={country.flag} />
                 <h2>languages</h2>
                 <ul>
